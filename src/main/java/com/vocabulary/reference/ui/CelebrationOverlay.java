@@ -7,7 +7,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.util.Arrays;
 
 public final class CelebrationOverlay extends JComponent {
     private final Timer timer;
@@ -49,7 +48,7 @@ public final class CelebrationOverlay extends JComponent {
         if (physics == null) return;
         Graphics2D g = (Graphics2D) graphics.create();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        Color[] colors = {new Color(52, 152, 219), new Color(231, 76, 60), new Color(241, 196, 15), new Color(46, 204, 113), new Color(155, 89, 182)};
+        Color[] colors = {Theme.PINK_EDGE, Theme.BLUE_EDGE, Theme.PINK, Theme.BLUE, Theme.INK};
         int i = 0;
         for (ParticlePhysics.Particle p : physics.particles()) {
             g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) p.alpha));
