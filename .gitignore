@@ -1,0 +1,8 @@
+target/
+.idea/
+*.iml
+*.db
+*.sqlite
+*.sqlite3
+data/
+*.log
