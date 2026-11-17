@@ -1,37 +1,92 @@
 # Vocabulary Learning — Java Swing Reference
 
-这是从 `Vocabulary-learning-software` 的 Python 行为规范独立重写的 Java 11 + Swing 参考实现。它不属于课程团队提交，不修改 `team-project`，也不复用任何课程仓库提交历史。
+An independent Java 11 and Swing reference implementation based on the Python
+behavior specification in `Vocabulary-learning-software`. This is separate from
+the course team submission: it does not modify `team-project` or reuse the course
+repository's commit history.
 
-## 已覆盖的参考行为
+## Reference behavior
 
-- 20 词学习轮次、四选一和“不会”答案
-- 中途退出后恢复相同轮次和题目快照
-- 错词/不会词只进入下一轮重测
-- 统一结算、掌握词去重、净新增目标进度和幂等结算
-- 本地 SQLite 保存轮次、作答、掌握词、错词、历史和设置
-- Swing 首页、学习、错词、历史、词典查询和设置页面
-- Free Dictionary API 查询；网络失败不影响离线学习
-- 结果页庆祝动画、跳过动画和减少动画设置
+- Study rounds of 20 words with four choices and an **I don't know** answer.
+- Resume the same round and stored question choices after closing the program.
+- Review only incorrect and unknown words in the next review round.
+- Finalize completed work with deduplicated mastery and net-new goal progress.
+- Store sessions, answers, mastery, mistakes, history and settings in local SQLite.
+- Swing screens for home, study, mistakes, history, dictionary lookup and settings.
+- Look up definitions through Free Dictionary API; network failures do not stop
+  offline study.
+- Celebrate completed results with an animation that can be skipped or reduced.
 
-## UI 参考配色
+The bundled content contains **60 sample words across L1–L3**, with 20 words in
+each reference level. New question snapshots use English definitions. Existing
+saved questions retain their original definitions and choices so that resuming
+an old round does not change its answers midway.
 
-当前 Swing UI 使用白底黑字，并以两个参考色板统一按钮、卡片、状态提示和图标：浅粉 `#FFF4FE` 与浅蓝 `#E4F5FF`。按钮和图标由 Java2D 绘制圆角与线性图形，不依赖额外图片资源；这只改变表现层，不改变学习、复习、词典查询或本地保存行为。
+## Reassessment and pronunciation update
 
-测评、完整 15 级词库、成就展示、严格导入导出、语音和全部 Python 内容规则会在此参考版的后续迭代中继续补齐。课程团队版本应重新设计 User Stories、接口和 PR，不应直接复制本仓库历史。
+Implemented and verified on November 17, 2026; see the [verification record](docs/VALIDATION.md).
 
-## 运行
+- A **20-question placement assessment** recommends one of the sample content
+  levels L1–L3. This is a reference-level check, not a standardized language test,
+  CEFR certification or a measurement of a learner's full vocabulary size.
+- Adopting the completed result immediately archives unfinished study or review
+  work without awarding completion credit, then opens a fresh 20-word round at
+  the recommended difficulty. Completed history, existing mastery and goals
+  remain intact. With only 20 words per level, a fresh round at the same level
+  may contain words seen previously; it is a new session, not a guarantee of
+  20 previously unseen words.
+- Pronunciation prefers dictionary-recorded audio. The selected US or UK accent
+  is preferred when available; any alternative accent is labeled according to
+  the available recording. Online clips require internet access. When no usable
+  recording is available, a local Windows speech fallback is identified as
+  synthesized speech rather than presented as a dictionary recording.
+  Broken dictionary proxy links can be recovered from their attributed Wikimedia
+  Commons source. Audio plays only after clicking **Listen**; it never starts
+  automatically on launch, navigation or a new question. **Stop audio** stops playback.
 
-```powershell
-mvn test
-mvn exec:java
+The full 15-level vocabulary, additional assessment lengths, achievements,
+validated import/export and remaining Python content rules are future work.
+See [the roadmap](docs/ROADMAP.md) for the remaining scope.
+
+## Visual design
+
+The Swing interface uses a white background and dark text, with pale pink
+`#FFF4FE` and pale blue `#E4F5FF` for buttons, cards, status indicators and icons.
+Java2D draws the rounded controls and line icons without extra image assets.
+The palette does not change the learning rules or persistence behavior.
+
+## Run
+
+```sh
+mvn verify
+mvn compile exec:java
 ```
 
-默认数据写入用户目录下的 `.vocabulary-learning-reference`。也可以设置 `VOCAB_DATA_DIR` 指向演示目录。不要提交个人数据库或 API 凭据。
+Use JDK 11 or later and Maven. Data defaults to `.vocabulary-learning-reference`
+under the current user's home directory. Set `VOCAB_DATA_DIR` to use a separate
+demonstration directory. Do not commit personal databases or API credentials.
 
-## 分层
+On Windows, double-click `run.cmd`, or run `./run.ps1`. Both compile the current
+source before opening the app. To change the active round, choose **Retake
+placement**, answer the 20 questions, then choose **Apply level and start fresh
+20 words**. The study screen immediately opens question 1 of the new round.
 
-`domain` 只包含业务对象和规则；`application` 定义用例及端口；`infrastructure` 提供 SQLite、词库和 HTTP API 实现；`ui` 只负责 Swing。外部 API 用 `DictionaryClient` 接口隔离，测试使用 fake client。
+Choose **Listen** in Study or Dictionary for pronunciation. Settings offers a
+US/UK accent preference; the audio status reports the accent actually available.
+Automated checks use silent audio doubles or decode a fixture without playing it.
 
-## 与教授要求的对应关系
+## Layers
 
-这个参考项目演示 Java Swing、外部 API、数据持久化、Use Case 分层、单元测试和动画模型。课程团队仍需在自己的仓库中按 Team Contract、User Story、feature branch、Pull Request、review、README/MVP 和公平 git 贡献要求完成工作。
+`domain` contains business objects and rules. `application` defines use cases and
+ports. `infrastructure` implements SQLite storage, content loading and HTTP
+services. `ui` handles Swing interaction. `DictionaryClient` isolates the external
+dictionary API, and tests use a fake client. See [architecture notes](docs/ARCHITECTURE.md)
+for the assessment, snapshot and pronunciation boundaries.
+
+## Relationship to the course project
+
+This reference demonstrates Java Swing, an external API, persistence, use-case
+separation, unit tests and an animation model. The course team must still design
+and implement its own user stories, interfaces and reviewed pull requests under
+its TeamContract, README/MVP and individual-contribution requirements. Do not
+copy this repository's history as evidence of team collaboration.

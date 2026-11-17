@@ -1,61 +1,61 @@
 id,lemma,meaning,level
-1,hello,你好,L1
-2,world,世界,L1
-3,book,书,L1
-4,learn,学习,L1
-5,write,写,L1
-6,read,阅读,L1
-7,listen,听,L1
-8,speak,说,L1
-9,question,问题,L1
-10,answer,答案,L1
-11,practice,练习,L1
-12,review,复习,L1
-13,remember,记住,L1
-14,forget,忘记,L1
-15,correct,正确的,L1
-16,wrong,错误的,L1
-17,progress,进度,L1
-18,goal,目标,L1
-19,history,历史,L1
-20,success,成功,L1
-21,habit,习惯,L2
-22,improve,改善,L2
-23,challenge,挑战,L2
-24,meaning,含义,L2
-25,example,例子,L2
-26,choice,选择,L2
-27,continue,继续,L2
-28,complete,完成,L2
-29,attempt,尝试,L2
-30,record,记录,L2
-31,session,学习轮次,L2
-32,master,掌握,L2
-33,accuracy,准确率,L2
-34,feature,功能,L2
-35,setting,设置,L2
-36,resource,资源,L2
-37,offline,离线的,L2
-38,online,在线的,L2
-39,network,网络,L2
-40,backup,备份,L2
-41,design,设计,L3
-42,domain,领域,L3
-43,entity,实体,L3
-44,interface,接口,L3
-45,controller,控制器,L3
-46,presenter,展示器,L3
-47,persistence,持久化,L3
-48,storage,存储,L3
-49,transaction,事务,L3
-50,validate,验证,L3
-51,export,导出,L3
-52,import,导入,L3
-53,achievement,成就,L3
-54,assessment,测评,L3
-55,difficulty,难度,L3
-56,recommendation,推荐,L3
-57,animation,动画,L3
-58,celebration,庆祝,L3
-59,particle,粒子,L3
-60,adapt,适应,L3
+1,hello,a greeting used when meeting someone,L1
+2,world,the planet Earth and everything on it,L1
+3,book,a set of written or printed pages joined together,L1
+4,learn,gain knowledge or skill through study or experience,L1
+5,write,form letters or words to express information,L1
+6,read,understand the meaning of written words,L1
+7,listen,pay attention to sounds in order to hear them,L1
+8,speak,communicate using spoken words,L1
+9,question,a sentence that asks for information,L1
+10,answer,a reply to a question,L1
+11,practice,repeat an activity to improve an ability,L1
+12,review,study material again to strengthen understanding,L1
+13,remember,keep information in mind or bring it back to mind,L1
+14,forget,fail to recall something learned earlier,L1
+15,correct,free from mistakes or errors,L1
+16,wrong,not true or accurate,L1
+17,progress,movement toward completing a task or goal,L1
+18,goal,a result that someone wants to achieve,L1
+19,history,a record of events that happened in the past,L1
+20,success,the achievement of an intended result,L1
+21,habit,a behavior repeated regularly and often automatically,L2
+22,improve,make something better or become better,L2
+23,challenge,a difficult task that requires effort or ability,L2
+24,meaning,the idea expressed by a word or statement,L2
+25,example,a specific case used to explain a general idea,L2
+26,choice,a selection made from available options,L2
+27,continue,keep doing something that has already begun,L2
+28,complete,finish all parts of a task,L2
+29,attempt,an effort to do or achieve something,L2
+30,record,store information so it can be used later,L2
+31,session,a period spent on a particular activity,L2
+32,master,learn something well enough to use it confidently,L2
+33,accuracy,the degree to which results are correct,L2
+34,feature,a useful capability of a product or program,L2
+35,setting,an option that controls how a program behaves,L2
+36,resource,a supply of information or materials that can be used,L2
+37,offline,not connected to the internet,L2
+38,online,connected to the internet,L2
+39,network,a system of connected devices that exchange information,L2
+40,backup,an extra copy of data kept for recovery,L2
+41,design,plan the structure and behavior of something,L3
+42,domain,an area of knowledge or activity,L3
+43,entity,a distinct object represented within a system,L3
+44,interface,a boundary through which components communicate,L3
+45,controller,a component that accepts input and invokes application actions,L3
+46,presenter,a component that prepares application results for display,L3
+47,persistence,the preservation of data after a program stops,L3
+48,storage,a place or method for retaining data,L3
+49,transaction,a group of operations that succeed or fail as one unit,L3
+50,validate,check whether data follows required rules,L3
+51,export,save data in a form that another program can use,L3
+52,import,bring data from an outside source into a program,L3
+53,achievement,a notable goal completed through effort,L3
+54,assessment,a process for evaluating knowledge or ability,L3
+55,difficulty,how hard a task is to perform,L3
+56,recommendation,a suggestion about a suitable choice or action,L3
+57,animation,a sequence of images that creates the appearance of movement,L3
+58,celebration,an activity that marks a happy or important event,L3
+59,particle,a very small piece of matter or a single visual effect element,L3
+60,adapt,change to suit new conditions,L3

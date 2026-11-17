@@ -8,6 +8,7 @@ import com.vocabulary.reference.domain.Goal;
 import com.vocabulary.reference.domain.HistoryRecord;
 import com.vocabulary.reference.domain.MistakeStat;
 import com.vocabulary.reference.domain.SessionSnapshot;
+import com.vocabulary.reference.domain.AssessmentSnapshot;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -57,6 +58,47 @@ public final class SQLiteStudyRepository implements StudyRepository, AutoCloseab
         return get("setting", "activeSession").filter(x -> !x.isEmpty()).flatMap(this::loadSession);
     }
     @Override public void setActiveSession(String id) { put("setting", "activeSession", id == null ? "" : id); }
+    @Override public List<SessionSnapshot> unfinishedSessions() {
+        List<SessionSnapshot> result = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareStatement("SELECT data FROM records WHERE kind='session'")) {
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    SessionSnapshot session = fromJson(rs.getString(1), SessionSnapshot.class);
+                    if ("ACTIVE".equals(session.status) || "NEEDS_REVIEW".equals(session.status)) result.add(session);
+                }
+            }
+        } catch (SQLException e) { throw new IllegalStateException(e); }
+        return result;
+    }
+    @Override public int difficulty() { return get("setting", "difficulty").map(Integer::parseInt).orElse(1); }
+    @Override public void saveAssessment(AssessmentSnapshot snapshot) { put("assessment", snapshot.id, json(snapshot)); }
+    @Override public Optional<AssessmentSnapshot> loadAssessment(String id) {
+        return get("assessment", id).map(value -> fromJson(value, AssessmentSnapshot.class));
+    }
+    @Override public Optional<AssessmentSnapshot> loadActiveAssessment() {
+        return get("setting", "activeAssessment").filter(value -> !value.isEmpty()).flatMap(this::loadAssessment);
+    }
+    @Override public void setActiveAssessment(String id) { put("setting", "activeAssessment", id == null ? "" : id); }
+    @Override public synchronized void adoptAssessment(AssessmentSnapshot assessment, List<SessionSnapshot> superseded,
+                                                       SessionSnapshot replacement, int newDifficulty) {
+        try {
+            connection.setAutoCommit(false);
+            try {
+                for (SessionSnapshot previous : superseded) saveSession(previous);
+                saveSession(replacement);
+                saveAssessment(assessment);
+                setActiveSession(replacement.id);
+                setActiveAssessment("");
+                put("setting", "difficulty", String.valueOf(newDifficulty));
+                connection.commit();
+            } catch (RuntimeException | SQLException failure) {
+                connection.rollback();
+                throw failure;
+            } finally {
+                connection.setAutoCommit(true);
+            }
+        } catch (SQLException failure) { throw new IllegalStateException("Could not save the new difficulty and round.", failure); }
+    }
     @Override public Set<Integer> masteredIds() {
         Set<Integer> ids = new LinkedHashSet<>();
         try (PreparedStatement ps = connection.prepareStatement("SELECT id FROM records WHERE kind='mastered'")) {

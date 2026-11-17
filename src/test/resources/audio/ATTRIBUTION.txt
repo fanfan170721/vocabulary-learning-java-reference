@@ -1,0 +1,11 @@
+hello-uk.ogg
+
+"hello" pronounced by Judith Franck (London, England).
+Creator: Association Shtooka, Judith Franck.
+Source: https://commons.wikimedia.org/wiki/File:En-uk-hello.ogg
+Source page ID: 9021983.
+License: Creative Commons Attribution 3.0 United States.
+License URL: https://creativecommons.org/licenses/by/3.0/us/
+The audio is unmodified. It is included solely as an offline decoder test fixture.
+Retrieved November 17, 2026 through the source URL returned by the Dictionary API
+and the Wikimedia Commons videoinfo API.
