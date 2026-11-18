@@ -5,6 +5,8 @@ behavior specification in `Vocabulary-learning-software`. This is separate from
 the course team submission: it does not modify `team-project` or reuse the course
 repository's commit history.
 
+**Switching computers:** [Current progress and continuation instructions](docs/HANDOFF.md).
+
 ## Reference behavior
 
 - Study rounds of 20 words with four choices and an **I don't know** answer.
